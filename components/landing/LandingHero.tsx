@@ -22,7 +22,23 @@ export default function LandingHero() {
     // Fase 3: Bottone appare (dopo 1.5s)
     timers.push(setTimeout(() => setAnimationPhase(3), 1500));
 
-    return () => timers.forEach(clearTimeout);
+    // Force video play on mobile
+    const playVideo = () => {
+      if (videoRef.current) {
+        videoRef.current.play().catch(() => {});
+      }
+    };
+    
+    // Try to play immediately and on user interaction
+    playVideo();
+    document.addEventListener('touchstart', playVideo, { once: true });
+    document.addEventListener('click', playVideo, { once: true });
+
+    return () => {
+      timers.forEach(clearTimeout);
+      document.removeEventListener('touchstart', playVideo);
+      document.removeEventListener('click', playVideo);
+    };
   }, []);
 
   // Easing premium
@@ -43,8 +59,14 @@ export default function LandingHero() {
           muted
           loop
           playsInline
+          preload="auto"
+          webkit-playsinline="true"
+          x-webkit-airplay="allow"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: 'brightness(0.35)' }}
+          onCanPlay={() => {
+            videoRef.current?.play().catch(() => {});
+          }}
         >
           <source src="/assets/videohome.mp4" type="video/mp4" />
         </video>
