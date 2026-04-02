@@ -12,6 +12,7 @@ import CompetenzeSection from '@/components/home/CompetenzeSection';
 import CompetenzeAvanzateSection from '@/components/home/CompetenzeAvanzateSection';
 import PerchéScegliereSection from '@/components/home/PerchéScegliereSection';
 import CTAFinalSection from '@/components/home/CTAFinalSection';
+import ContattiSection from '@/components/home/ContattiSection';
 import Footer from '@/components/navigation/Footer';
 
 export default function HomePage() {
@@ -32,6 +33,7 @@ export default function HomePage() {
       <CompetenzeAvanzateSection />
       <PerchéScegliereSection />
       <CTAFinalSection />
+      <ContattiSection />
       <Footer />
     </main>
   );
