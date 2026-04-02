@@ -7,9 +7,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
 const navLinks = [
+  { href: '#chi-sono', label: 'Chi sono' },
   { href: '#metodo', label: 'Metodo' },
   { href: '#percorsi', label: 'Percorsi' },
-  { href: '#chi-sono', label: 'Chi sono' },
 ];
 
 export default function Navbar() {
@@ -36,6 +36,41 @@ export default function Navbar() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    
+    if (element) {
+      const navbarHeight = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleContactClick = () => {
+    setIsMobileMenuOpen(false);
+    const element = document.getElementById('contattami');
+    
+    if (element) {
+      const navbarHeight = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <>
@@ -83,6 +118,7 @@ export default function Navbar() {
               >
                 <Link 
                   href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className="relative text-sm font-medium text-white hover:text-amber-400 transition-colors duration-300 group"
                 >
                   {link.label}
@@ -97,11 +133,12 @@ export default function Navbar() {
               transition={{ delay: 0.3, duration: 0.4 }}
             >
               <motion.button 
+                onClick={handleContactClick}
                 className="px-6 py-2.5 bg-amber-500 text-black text-sm font-bold rounded-full transition-all duration-300 hover:bg-amber-400 hover:shadow-lg hover:shadow-amber-500/30"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Contatti
+                Contattami
               </motion.button>
             </motion.div>
           </div>
@@ -152,8 +189,8 @@ export default function Navbar() {
                   >
                     <Link 
                       href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
                       className="block py-3 text-lg font-medium text-gray-800 hover:text-black transition-colors"
-                      onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {link.label}
                     </Link>
@@ -166,8 +203,11 @@ export default function Navbar() {
                   transition={{ delay: 0.15, duration: 0.3 }}
                   className="pt-4"
                 >
-                  <button className="w-full py-4 bg-black text-white font-medium rounded-full hover:bg-gray-900 transition-colors">
-                    Contatti
+                  <button 
+                    onClick={handleContactClick}
+                    className="w-full py-4 bg-black text-white font-medium rounded-full hover:bg-gray-900 transition-colors"
+                  >
+                    Contattami
                   </button>
                 </motion.div>
               </div>
