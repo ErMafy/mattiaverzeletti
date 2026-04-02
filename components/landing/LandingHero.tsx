@@ -10,6 +10,14 @@ export default function LandingHero() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    // Force video autoplay on mount
+    const video = videoRef.current;
+    if (video) {
+      video.muted = true;
+      video.playsInline = true;
+      video.play().catch(() => {});
+    }
+
     // Sequenza animazioni: Logo al centro → Testo → Bottone
     const timers: NodeJS.Timeout[] = [];
     
@@ -22,22 +30,8 @@ export default function LandingHero() {
     // Fase 3: Bottone appare (dopo 1.5s)
     timers.push(setTimeout(() => setAnimationPhase(3), 1500));
 
-    // Force video play on mobile
-    const playVideo = () => {
-      if (videoRef.current) {
-        videoRef.current.play().catch(() => {});
-      }
-    };
-    
-    // Try to play immediately and on user interaction
-    playVideo();
-    document.addEventListener('touchstart', playVideo, { once: true });
-    document.addEventListener('click', playVideo, { once: true });
-
     return () => {
       timers.forEach(clearTimeout);
-      document.removeEventListener('touchstart', playVideo);
-      document.removeEventListener('click', playVideo);
     };
   }, []);
 
@@ -59,14 +53,9 @@ export default function LandingHero() {
           muted
           loop
           playsInline
-          preload="auto"
-          webkit-playsinline="true"
-          x-webkit-airplay="allow"
+          preload="metadata"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: 'brightness(0.35)' }}
-          onCanPlay={() => {
-            videoRef.current?.play().catch(() => {});
-          }}
         >
           <source src="/assets/videohome.mp4" type="video/mp4" />
         </video>
@@ -110,7 +99,7 @@ export default function LandingHero() {
               }
             }}
           >
-            <div className="relative w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80">
+            <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
               <Image
                 src="/assets/logo.png"
                 alt="Logo MV"
