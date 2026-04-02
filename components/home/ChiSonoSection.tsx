@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { Award, GraduationCap, Users, Phone, Mail, MessageCircle } from 'lucide-react';
 
@@ -15,8 +16,18 @@ const EMAIL = process.env.NEXT_PUBLIC_EMAIL || 'mv.athletica@gmail.com';
 const WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP || '393389555120';
 
 export default function ChiSonoSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+
+  // Parallax effect for the image
+  const imageY = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1.02, 0.98]);
+
   return (
-    <section id="chi-sono" className="w-full pt-28 md:pt-32 pb-20 md:pb-28 bg-gradient-to-b from-gray-900 via-gray-900 to-black overflow-hidden">
+    <section ref={sectionRef} id="chi-sono" className="w-full pt-28 md:pt-32 pb-20 md:pb-28 bg-gradient-to-b from-gray-900 via-gray-900 to-black overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Header */}
         <motion.div
@@ -29,13 +40,13 @@ export default function ChiSonoSection() {
           <span className="inline-block text-xs font-bold tracking-[0.3em] text-amber-400 uppercase mb-4">
             IL COACH
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight shimmer-gold">
             CIAO, SONO MATTIA
           </h2>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Photo - Prima su mobile */}
+          {/* Photo - Prima su mobile con PARALLAX */}
           <motion.div
             className="relative order-1 lg:order-2"
             initial={{ opacity: 0, x: 30, scale: 0.95 }}
@@ -46,8 +57,11 @@ export default function ChiSonoSection() {
             {/* Background decoration - Gold */}
             <div className="absolute -inset-4 bg-gradient-to-br from-amber-500/20 to-amber-600/10 rounded-3xl -z-10 blur-xl" />
             
-            {/* Image container */}
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-amber-500/10 group border border-amber-500/20">
+            {/* Image container with parallax */}
+            <motion.div 
+              className="relative rounded-2xl overflow-hidden shadow-2xl shadow-amber-500/10 group border border-amber-500/20"
+              style={{ y: imageY, scale: imageScale }}
+            >
               <div className="relative w-full aspect-[3/4]">
                 <Image
                   src="/assets/mattia.png"
@@ -60,11 +74,11 @@ export default function ChiSonoSection() {
                 {/* Overlay gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               </div>
-            </div>
+            </motion.div>
 
             {/* Floating badge */}
             <motion.div
-              className="absolute -bottom-4 -left-4 px-6 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-black rounded-xl shadow-xl font-bold"
+              className="absolute -bottom-4 -left-4 px-6 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-black rounded-xl shadow-xl font-bold tap-feedback"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
@@ -129,9 +143,9 @@ export default function ChiSonoSection() {
                 href={`https://wa.me/${WHATSAPP}?text=Ciao%20Mattia,%20vorrei%20informazioni%20sui%20tuoi%20percorsi%20di%20allenamento.`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 px-8 py-4 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition-all duration-300 shadow-lg shadow-green-500/30"
+                className="flex items-center justify-center gap-3 px-8 py-4 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transition-all duration-300 shadow-lg shadow-green-500/30 tap-feedback"
                 whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileTap={{ scale: 0.92 }}
               >
                 <MessageCircle className="w-5 h-5" />
                 WHATSAPP
@@ -139,9 +153,9 @@ export default function ChiSonoSection() {
               
               <motion.a
                 href={`tel:${PHONE.replace(/\s/g, '')}`}
-                className="flex items-center justify-center gap-3 px-8 py-4 border-2 border-amber-500 text-amber-400 font-bold rounded-full hover:bg-amber-500 hover:text-black transition-all duration-300"
+                className="flex items-center justify-center gap-3 px-8 py-4 border-2 border-amber-500 text-amber-400 font-bold rounded-full hover:bg-amber-500 hover:text-black transition-all duration-300 tap-feedback"
                 whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileTap={{ scale: 0.92 }}
               >
                 <Phone className="w-5 h-5" />
                 CHIAMAMI

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import '../globals.css';
+import CustomCursor from '@/components/ui/CustomCursor';
 
 export const metadata: Metadata = {
   title: 'Mattia Verzeletti - Personal Trainer Online',
@@ -27,7 +28,8 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Mattia PT" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </head>
-      <body className="bg-white text-black antialiased overflow-x-hidden">
+      <body className="bg-white text-black antialiased overflow-x-hidden md:cursor-none">
+        <CustomCursor />
         {children}
       </body>
     </html>

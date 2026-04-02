@@ -145,9 +145,71 @@
   .glow-black {
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
   }
+
+  /* Shimmer gold effect */
+  .shimmer-gold {
+    background: linear-gradient(
+      110deg,
+      #ffffff 0%,
+      #ffffff 40%,
+      #fbbf24 50%,
+      #ffffff 60%,
+      #ffffff 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  /* Tap/click feedback */
+  .tap-feedback {
+    @apply transition-transform active:scale-95;
+  }
+
+  .tap-feedback-strong {
+    @apply transition-all duration-150 active:scale-90 active:opacity-80;
+  }
+
+  /* Section fade transitions */
+  .section-fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .section-fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Parallax helper */
+  .parallax-slow {
+    will-change: transform;
+  }
+
+  /* 3D card tilt */
+  .card-3d {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .card-3d-inner {
+    transition: transform 0.3s ease-out;
+    transform-style: preserve-3d;
+  }
 }
 
 /* Keyframes */
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
 @keyframes fadeUp {
   from {
     opacity: 0;
