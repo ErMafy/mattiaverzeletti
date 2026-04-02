@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Sparkles, MessageCircle } from 'lucide-react';
 
@@ -44,15 +44,21 @@ const percorsi = [
   },
 ];
 
-// 3D Tilt Card Component
+// 3D Tilt Card Component - Solo desktop, su mobile niente tilt
 function TiltCard({ children, className, highlight }: { children: React.ReactNode; className?: string; highlight?: boolean }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
+  const [isMobile, setIsMobile] = useState(true); // Default true per SSR
+
+  // Check if mobile on mount
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window);
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
+    if (!cardRef.current || isMobile) return;
     
     const rect = cardRef.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
@@ -69,13 +75,24 @@ function TiltCard({ children, className, highlight }: { children: React.ReactNod
     setRotateY(rotateYValue);
   };
 
-  const handleMouseEnter = () => setIsHovering(true);
+  const handleMouseEnter = () => {
+    if (!isMobile) setIsHovering(true);
+  };
   
   const handleMouseLeave = () => {
     setIsHovering(false);
     setRotateX(0);
     setRotateY(0);
   };
+
+  // Su mobile, render semplice senza effetti 3D
+  if (isMobile) {
+    return (
+      <div className={className}>
+        {children}
+      </div>
+    );
+  }
 
   return (
     <div
