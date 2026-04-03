@@ -69,7 +69,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = getRoutes(appDir)
   
   // Remove duplicates and sort
-  const uniqueRoutes = [...new Set(routes)]
+  const uniqueRoutes = Array.from(new Set(routes))
   
   const sitemapEntries: MetadataRoute.Sitemap = uniqueRoutes.map((route) => {
     const isHome = route === '/'
