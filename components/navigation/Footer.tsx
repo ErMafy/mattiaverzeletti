@@ -38,7 +38,7 @@ export default function Footer() {
                   src="/assets/logo.png"
                   alt="Logo"
                   fill
-                  className="object-contain brightness-0 invert"
+                  className="object-contain"
                 />
               </div>
               <span className="text-xl font-bold tracking-tight">
