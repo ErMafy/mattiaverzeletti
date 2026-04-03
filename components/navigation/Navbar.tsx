@@ -91,7 +91,7 @@ export default function Navbar() {
             className="flex items-center gap-3 group"
           >
             <motion.div 
-              className="relative w-16 h-16 md:w-20 md:h-20"
+              className="relative w-10 h-10 md:w-12 md:h-12"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >

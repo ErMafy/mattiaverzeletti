@@ -127,7 +127,7 @@ export default function LandingHero() {
       <div className="relative z-10 h-full flex items-center justify-center px-6">
         <div className="flex flex-col items-center text-center">
           
-          {/* Logo - PIU GRANDE e CENTRATO */}
+          {/* Logo centrato */}
           <motion.div
             className="relative -mb-4"
             initial={{ opacity: 0, scale: 0.8 }}
@@ -140,7 +140,7 @@ export default function LandingHero() {
               ease: easeOutExpo,
             }}
           >
-            <div className="relative w-72 h-72 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem]">
+            <div className="relative w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80">
               <Image
                 src="/assets/logo.png"
                 alt="Logo MV"
