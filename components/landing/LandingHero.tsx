@@ -140,7 +140,7 @@ export default function LandingHero() {
               ease: easeOutExpo,
             }}
           >
-            <div className="relative w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80">
+            <div className="relative w-40 h-40 md:w-72 md:h-72 lg:w-80 lg:h-80">
               <Image
                 src="/assets/logo.png"
                 alt="Logo MV"
