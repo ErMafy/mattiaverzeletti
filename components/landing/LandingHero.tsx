@@ -129,7 +129,7 @@ export default function LandingHero() {
           
           {/* Logo centrato */}
           <motion.div
-            className="relative mb-2 md:-mb-4"
+            className="relative mb-2 md:-mb-4 -mt-12 md:mt-0"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={animationPhase >= 1 ? {
               opacity: 1,
