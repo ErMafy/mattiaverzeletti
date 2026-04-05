@@ -6,6 +6,11 @@ import CustomCursor from '@/components/ui/CustomCursor';
 export const metadata: Metadata = {
   title: 'Mattia Verzeletti - Personal Trainer Online',
   description: 'Allenamenti personalizzati online con coaching privato. Programmi su misura, monitoraggio costante e supporto continuo.',
+  icons: {
+    icon: '/assets/favicon.png',
+    shortcut: '/assets/favicon.png',
+    apple: '/assets/favicon.png',
+  },
   openGraph: {
     title: 'Mattia Verzeletti - Personal Trainer Online',
     description: 'Allenamenti personalizzati online con coaching privato',
