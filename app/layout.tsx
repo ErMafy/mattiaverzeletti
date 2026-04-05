@@ -7,9 +7,15 @@ export const metadata: Metadata = {
   title: 'Mattia Verzeletti - Personal Trainer Online',
   description: 'Allenamenti personalizzati online con coaching privato. Programmi su misura, monitoraggio costante e supporto continuo.',
   icons: {
-    icon: '/assets/favicon.png',
+    icon: [
+      { url: '/assets/favicon.png', sizes: '32x32', type: 'image/png' },
+      { url: '/assets/favicon.png', sizes: '192x192', type: 'image/png' },
+      { url: '/assets/favicon.png', sizes: '512x512', type: 'image/png' },
+    ],
     shortcut: '/assets/favicon.png',
-    apple: '/assets/favicon.png',
+    apple: [
+      { url: '/assets/favicon.png', sizes: '180x180', type: 'image/png' },
+    ],
   },
   openGraph: {
     title: 'Mattia Verzeletti - Personal Trainer Online',
