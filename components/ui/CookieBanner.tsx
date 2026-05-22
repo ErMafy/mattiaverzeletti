@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function CookieBanner() {
-  const [isVisible, setIsVisible] = setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [showPreferences, setShowPreferences] = useState(false);
 
   const [preferences, setPreferences] = useState({
