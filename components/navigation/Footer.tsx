@@ -164,8 +164,19 @@ export default function Footer() {
         <div className="h-px bg-white/10 mb-8" />
 
         {/* Bottom Footer */}
-        <div className="flex flex-col items-center justify-center gap-4">
-          <p className="text-gray-500 text-xs">
+        <div className="flex flex-col items-center justify-center gap-4 text-center">
+          <div className="text-gray-500 text-xs flex flex-col md:flex-row items-center gap-2 md:gap-6">
+            <Link href="/privacy-policy" className="hover:text-amber-500 transition-colors">Privacy Policy</Link>
+            <Link href="/cookie-policy" className="hover:text-amber-500 transition-colors">Cookie Policy</Link>
+            <Link href="/terms-conditions" className="hover:text-amber-500 transition-colors">Termini e Condizioni</Link>
+          </div>
+          
+          <div className="text-gray-500 text-xs space-y-1">
+            <p>P.IVA 02831030032 | CF: VRZMTT02S28B019Z</p>
+            <p>NOVARA (NO) 28100</p>
+          </div>
+
+          <p className="text-gray-500 text-xs mt-2">
             © {currentYear} Mattia Verzeletti. Tutti i diritti riservati.
           </p>
           <p className="text-gray-600 text-xs font-medium tracking-wider">

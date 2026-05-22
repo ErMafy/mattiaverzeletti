@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import '../globals.css';
 import CustomCursor from '@/components/ui/CustomCursor';
+import CookieBanner from '@/components/ui/CookieBanner';
 
 export const metadata: Metadata = {
   title: 'Mattia Verzeletti - Personal Trainer Online',
@@ -42,6 +43,7 @@ export default function RootLayout({
       <body className="bg-white text-black antialiased overflow-x-hidden md:cursor-none">
         <CustomCursor />
         {children}
+        <CookieBanner />
       </body>
     </html>
   );
